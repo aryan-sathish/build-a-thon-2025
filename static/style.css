@@ -1,4 +1,4 @@
-/* style.css */
+style.css
 
 /* General list styling */
 ul li {
@@ -8,10 +8,10 @@ ul li {
 /* Header styling */
 header {
     padding: 20px;
-    background-color: #556D8A;
+    background-color: #90e7e7;
     border-bottom: 3px solid #ccc;
 }
-
+/*
 header h1 a {
     text-decoration: none;
     color: black;
@@ -21,16 +21,18 @@ header h1 a:hover {
     text-decoration: underline;
     color: darkblue;
 }
-
-footer {
+*/
+/*footer {
     padding: 20px;
     background-color: #556D8A;
     border-bottom: 3px solid #ccc;
 }
-
+*/
 footer a {
     text-decoration: none;
     color: black;
+    background-color: darkblue;
+    
 }
 
 footer a:hover {
@@ -40,20 +42,43 @@ footer a:hover {
 
 /* Navigation bar styling */
 
-
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0; /* Reset browser default margin */
-    background-color: #A9D6E5   ;
+    background-color: white   ;
+
 }
 
 main {
     padding: 20px; /* Adds space inside main so content doesn't hug edges */
     margin: 20px auto; /* Adds space outside main; auto centers if max-width used */
     max-width: 900px; /* Optional: keeps content from stretching too wide on big screens */
-    background-color: #6e74ca ; 
+    background-color: #94fee2 ; 
     border-radius: 8px; /* Slightly rounded corners for a nicer look */
     box-shadow: 0 0 8px rgba(0,0,0,0.1); /* subtle shadow for depth */
     
 
+}
+
+button {
+  background-color: hsl(219, 100%, 71%);
+  border: none;
+  color: rgb(102, 161, 255);
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  font-family: "Poppins", sans-serif;
+}
+
+.circlebutton {
+    width: 100px;
+    text-align: center;
+    
+}
+
+h2 {
+    font-family: "Poppins", sans-serif;
 }
