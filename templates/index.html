@@ -14,11 +14,30 @@
       Test
    </form> -->
    
-   <button type="button" class="btn droplet-btn" id = "btn-timer">Start Timer</button>
-   <h1 id="timer">0</h1>
+   <button class="water-btn" title="Start Timer" id="btn-timer">
+      <i class="bi bi-droplet-fill"></i>
+   </button>
+
+   <button type="button" class="btn stop-btn" aria-label="Stop" id="btn-stop" style="background-color:red; color:white;">
+  Stop Timer
+</button>
+
+   <h1 id="timer">00:00:00</h1>
    <script> 
-      let timer = 0;
+      let seconds = 0;
+      let minutes = 0;
+      let hours = 0;
+
       let interval = null;
+
+      function updateTimerDisplay() {
+    // Pad with leading zeros (e.g., 01:05:09)
+    let formattedTime = 
+      String(hours).padStart(2, '0') + ":" +
+      String(minutes).padStart(2, '0') + ":" +
+      String(seconds).padStart(2, '0');
+    document.getElementById("timer").textContent = formattedTime;
+  }
 
       document.getElementById("btn-timer").addEventListener("click", function() {
       // If timer is running; stop
@@ -26,13 +45,25 @@
         clearInterval(interval);
       }
       //Reset Timer
-      timer = 0;
+      seconds = 0;
+      minutes = 0;
+      hours = 0;
+      updateTimerDisplay();
       document.getElementById("timer").textContent = timer;
 
       //Start New timer
       interval = setInterval(() => {
-         timer++;
+         seconds++;
          document.getElementById("timer").textContent = timer;
+         if (seconds == 60) {
+            seconds = 0;
+            minutes ++;
+         }
+         if (minutes == 60) {
+            minutes = 0;
+            hours ++;
+         }
+
          }, 1000);
       });
 

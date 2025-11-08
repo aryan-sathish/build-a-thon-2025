@@ -75,13 +75,23 @@ button {
   margin: 4px 2px;
   font-family: "Poppins", sans-serif;
 }
+.water-btn {
+      background: none;          /* no default button color */
+      border: none;              /* remove border */
+      cursor: pointer;
+      font-size: 4rem;           /* size of the icon */
+      color: #007BFF;            /* solid blue fill */
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
 
-.circlebutton {
-    width: 100px;
-    text-align: center;
-    
-}
+    .water-btn:hover {
+      transform: scale(1.2);
+      color: #0056b3;           /* darker blue on hover */
+    }
 
+    .water-btn:active {
+      transform: scale(1.1);
+    }
 h2 {
     font-family: "Poppins", sans-serif;
 }
