@@ -22,12 +22,13 @@ header h1 a:hover {
     color: darkblue;
 }
 */
-/*footer {
+footer {
     padding: 20px;
     background-color: #556D8A;
     border-bottom: 3px solid #ccc;
+    margin-top: auto; /* pushes footer to bottom when there's extra vertical space */
+    width: 100%;
 }
-*/
 footer a {
     text-decoration: none;
     color: black;
@@ -46,7 +47,9 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0; /* Reset browser default margin */
     background-color: white   ;
-
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ensure body fills the viewport */
 }
 
 main {
@@ -56,7 +59,7 @@ main {
     background-color: #94fee2 ; 
     border-radius: 8px; /* Slightly rounded corners for a nicer look */
     box-shadow: 0 0 8px rgba(0,0,0,0.1); /* subtle shadow for depth */
-    
+    flex:1;
 
 }
 
