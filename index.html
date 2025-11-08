@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>H2Optimize</title>
+   {% include 'design_templates/head.html' %}
+</head>
+<body>
+   {% include 'design_templates/header.html' %}
+   <!-- {% include 'design_templates/header.html' %} -->
+    <main>
+   <h2>Measure Your Water Usage!</h2>
+   <!-- <form action="/" method="POST">
+      Test
+   </form> -->
+   
+   <button class="water-btn" title="Start Timer" id="btn-timer">
+      <i class="bi bi-droplet-fill"></i>
+   </button>
+
+   <button type="button" class="btn stop-btn" aria-label="Stop" id="btn-stop" style="background-color:red; color:white;">
+  Stop Timer
+</button>
+
+   <h1 id="timer">00:00:00</h1>
+   <script> 
+      let seconds = 0;
+      let minutes = 0;
+      let hours = 0;
+
+      let interval = null;
+
+       const timerDisplay = document.getElementById("timer");
+
+      function updateTimerDisplay() {
+    // Pad with leading zeros (e.g., 01:05:09)
+   const formattedTime = 
+      String(hours).padStart(2, '0') + ":" +
+      String(minutes).padStart(2, '0') + ":" +
+      String(seconds).padStart(2, '0');
+      timerDisplay.textContent = formattedTime;
+  }
+
+      document.getElementById("btn-timer").addEventListener("click", function() {
+      // If timer is running; stop
+      if (interval !== null) {
+        clearInterval(interval);
+      }
+      //Reset Timer
+      seconds = 0;
+      minutes = 0;
+      hours = 0;
+      updateTimerDisplay();
+
+      //Start New timer
+      interval = setInterval(() => {
+         seconds++;
+         if (seconds == 60) {
+            seconds = 0;
+            minutes ++;
+         }
+         if (minutes == 60) {
+            minutes = 0;
+            hours ++;
+         }
+         updateTimerDisplay();
+         }, 1000);
+      });
+
+       document.getElementById("btn-stop").addEventListener("click", function() {
+        clearInterval(interval);
+        interval = null;
+      });
+
+   </script>
+   </main>
+   
+   {% include 'design_templates/footer.html' %}
+</body>
+</html>
