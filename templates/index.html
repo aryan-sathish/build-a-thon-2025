@@ -14,11 +14,9 @@
       Test
    </form> -->
    
-   <button type="button" class="btn btn-primary" id = "btn-timer">
-   <i class="bi bi-droplet-fill"></i> Start Timer
-   </button>
-
-   <!-- <script> 
+   <button type="button" class="btn droplet-btn" id = "btn-timer">Start Timer</button>
+   <h1 id="timer">0</h1>
+   <script> 
       let timer = 0;
       let interval = null;
 
@@ -27,11 +25,18 @@
       if (interval !== null) {
         clearInterval(interval);
       }
-
+      //Reset Timer
       timer = 0;
-      document =
+      document.getElementById("timer").textContent = timer;
 
-   </script> -->
+      //Start New timer
+      interval = setInterval(() => {
+         timer++;
+         document.getElementById("timer").textContent = timer;
+         }, 1000);
+      });
+
+   </script>
    </main>
    
    {% include 'design_templates/footer.html' %}
