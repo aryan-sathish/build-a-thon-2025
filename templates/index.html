@@ -31,6 +31,8 @@
 </button>
 
    <h1 id="timer">00:00:00</h1>
+
+   <h3 id="Report"></h3>
    <script> 
       let selectedFlowRate = 0;
       let seconds = 0;
@@ -43,7 +45,8 @@
    const prev = localStorage.getItem("lastUsage");
    if (prev) {
       document.getElementById("Report").textContent =
-         "Last shower: " + parseFloat(prev).toFixed(2) + " gallons.";
+         "Last shower: " + parseFloat(prev).toFixed(2) + " gallons.";} else {
+      report.textContent = "No previous data — start tracking now!";
    }
 });
 
@@ -122,6 +125,7 @@
 
             //Store previous usages for later reference
             let previousUsage = localStorage.getItem("lastUsage");
+            console.log("Previous usage found:", previousUsage);
             if (previousUsage) {
                document.getElementById("Report").textContent += "\nLast shower: " + parseFloat(previousUsage).toFixed(2) + " gallons.";
             }        
@@ -155,7 +159,6 @@
      
 
    </script>
-   <h3 id="Report"></h3>
    </main>
    
    {% include 'design_templates/footer.html' %}
