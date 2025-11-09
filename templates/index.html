@@ -39,6 +39,14 @@
       // let timer = 0;
       let interval = null;
 
+      window.addEventListener("load", () => {
+   const prev = localStorage.getItem("lastUsage");
+   if (prev) {
+      document.getElementById("Report").textContent =
+         "Last shower: " + parseFloat(prev).toFixed(2) + " gallons.";
+   }
+});
+
 
      const popup = document.getElementById("flow-popup");
          const timerDisplay = document.getElementById("timer");
@@ -85,6 +93,12 @@
                      // timer++;
                   }
                   updateTimerDisplay();
+
+                  let totalMinutes = hours * 60 + minutes + seconds / 60;
+                  let gallons_used = totalMinutes * selectedFlowRate;
+                  document.getElementById("Report").textContent = "Gallons used so far: " + gallons_used.toFixed(2);
+
+
                }, 1000);
             });
          });
@@ -104,6 +118,38 @@
             let gallons_used = totalMinutes * selectedFlowRate;
             let gallons_used_report = ("You used " + gallons_used.toFixed(2) + " gallons of water!");
             document.getElementById("Report").innerHTML = gallons_used_report;
+
+
+            //Store previous usages for later reference
+            let previousUsage = localStorage.getItem("lastUsage");
+            if (previousUsage) {
+               document.getElementById("Report").textContent += "\nLast shower: " + parseFloat(previousUsage).toFixed(2) + " gallons.";
+            }        
+            localStorage.setItem("lastUsage", gallons_used);
+            
+
+            //Report how they did.
+            if (gallons_used < 10) {
+               document.getElementById("Report").innerHTML += " ✨🤩 WOW! You're a water saving legend!";
+               document.getElementById("Report").style.color = "gold";
+            } 
+            else if (gallons_used < 15) {
+               document.getElementById("Report").innerHTML += " 🏆 Great job saving water!";
+               document.getElementById("Report").style.color = "aqua";
+            }
+            else if (gallons_used < 20) {
+               document.getElementById("Report").innerHTML += " 👍 Nice job! You're getting better!";
+               document.getElementById("Report").style.color = "aquamarine";
+            }  else if (gallons_used < 30) {
+               document.getElementById("Report").innerHTML += " 💧 Not bad, but you can do better!";
+               document.getElementById("Report").style.color = "blue";
+            } else if (gallons_used < 35) {
+               document.getElementById("Report").innerHTML += " 🚿 Try to shorten your showers!";
+               document.getElementById("Report").style.color = "salmon";
+            } else {
+               document.getElementById("Report").innerHTML += " 😡 DANG! No wonder why there are so many droughts! ";
+               document.getElementById("Report").style.color = "crimson";
+            }
 
          });
      
