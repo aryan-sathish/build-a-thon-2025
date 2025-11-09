@@ -18,56 +18,98 @@
       <i class="bi bi-droplet-fill"></i>
    </button>
 
+<div id="flow-popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+   background:white; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align:center;">
+  <h3>How much water does your shower use?</h3>
+  <button class="flow-btn" data-flow="3">A lot (3 gpm)</button>
+  <button class="flow-btn" data-flow="2.5">Medium (2.5 gpm)</button>
+  <button class="flow-btn" data-flow="2">A little (2 gpm)</button>
+</div>
+
    <button type="button" class="btn stop-btn" aria-label="Stop" id="btn-stop" style="background-color:red; color:white;">
   Stop Timer
 </button>
 
    <h1 id="timer">00:00:00</h1>
    <script> 
+      let selectedFlowRate = 0;
       let seconds = 0;
       let minutes = 0;
       let hours = 0;
-
+      // let timer = 0;
       let interval = null;
 
-      function updateTimerDisplay() {
-    // Pad with leading zeros (e.g., 01:05:09)
-    let formattedTime = 
-      String(hours).padStart(2, '0') + ":" +
-      String(minutes).padStart(2, '0') + ":" +
-      String(seconds).padStart(2, '0');
-    document.getElementById("timer").textContent = formattedTime;
-  }
 
-      document.getElementById("btn-timer").addEventListener("click", function() {
-      // If timer is running; stop
-      if (interval !== null) {
-        clearInterval(interval);
-      }
-      //Reset Timer
-      seconds = 0;
-      minutes = 0;
-      hours = 0;
-      updateTimerDisplay();
-      document.getElementById("timer").textContent = timer;
+     const popup = document.getElementById("flow-popup");
+         const timerDisplay = document.getElementById("timer");
 
-      //Start New timer
-      interval = setInterval(() => {
-         seconds++;
-         document.getElementById("timer").textContent = timer;
-         if (seconds == 60) {
-            seconds = 0;
-            minutes ++;
-         }
-         if (minutes == 60) {
-            minutes = 0;
-            hours ++;
+         function updateTimerDisplay() {
+            const formattedTime =
+               String(hours).padStart(2, '0') + ":" +
+               String(minutes).padStart(2, '0') + ":" +
+               String(seconds).padStart(2, '0');
+            timerDisplay.textContent = formattedTime;
          }
 
-         }, 1000);
-      });
+         // Show popup when Start Timer is clicked
+         document.getElementById("btn-timer").addEventListener("click", function() {
+            popup.style.display = "block";
+         });
+
+         // When user selects flow rate
+         document.querySelectorAll(".flow-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+               selectedFlowRate = parseFloat(this.dataset.flow);
+               console.log("Selected flow rate:", selectedFlowRate, "gpm");
+               popup.style.display = "none";
+
+               // Reset and start timer
+               clearInterval(interval);
+               seconds = 0; 
+               minutes = 0; 
+               hours = 0;
+               // timer = 0;
+               updateTimerDisplay();
+
+               interval = setInterval(() => {
+                  seconds++;
+                  // timer++;
+                  if (seconds == 60) {
+                     seconds = 0;
+                     minutes++;
+                     // timer++;
+                  }
+                  if (minutes == 60) {
+                     minutes = 0;
+                     hours++;
+                     // timer++;
+                  }
+                  updateTimerDisplay();
+               }, 1000);
+            });
+         });
+
+         // Stop button
+         document.getElementById("btn-stop").addEventListener("click", function() {
+            clearInterval(interval);
+            interval = null;
+            console.log("Timer stopped at:", timerDisplay.textContent);
+
+            let totalMinutes = hours * 60 + minutes + seconds / 60;
+
+
+            // Water Used = duration of shower * flow rate
+
+            //Gallons Used
+            let gallons_used = totalMinutes * selectedFlowRate;
+            let gallons_used_report = ("You used " + gallons_used.toFixed(2) + " gallons of water!");
+            document.getElementById("Report").innerHTML = gallons_used_report;
+
+         });
+     
 
    </script>
+   <h3 id="Report"></h3>
    </main>
    
    {% include 'design_templates/footer.html' %}

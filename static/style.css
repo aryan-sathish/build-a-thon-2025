@@ -95,3 +95,19 @@ button {
 h2 {
     font-family: "Poppins", sans-serif;
 }
+.flow-btn {
+  background-color: #4a90e2;
+  color: white;              /* make text visible */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+
+}
+
+.flow-btn:hover {
+  background-color: #357abd; /* darker blue on hover */
+}
