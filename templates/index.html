@@ -4,10 +4,13 @@
    <meta charset="UTF-8">
    <title>H2Optimize</title>
    {% include 'design_templates/head.html' %}
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+   <h1 id    = "TITLE">H2Optimize</h1>
    {% include 'design_templates/header.html' %}
    <!-- {% include 'design_templates/header.html' %} -->
+    <div class="rain"></div>
     <main>
    <h2>Measure Your Water Usage!</h2>
    <!-- <form action="/" method="POST">
@@ -154,9 +157,41 @@
                document.getElementById("Report").innerHTML += " 😡 DANG! No wonder why there are so many droughts! ";
                document.getElementById("Report").style.color = "crimson";
             }
+            if (previousUsage) {
+        reportText += "\nLast shower: " + parseFloat(previousUsage).toFixed(2) + " gallons.";
+    }
 
+    // Update report
+    document.getElementById("Report").textContent = reportText;
+
+    // Save current usage for next time
+    localStorage.setItem("lastUsage", gallons_used);
          });
-     
+
+          const rainContainer = document.querySelector(".rain");
+    const numberOfDrops = 120; // increase for heavier rain
+
+    for (let i = 0; i < numberOfDrops; i++) {
+        const drop = document.createElement("div");
+        drop.classList.add("rain-drop");
+
+        // Random horizontal position across viewport
+        drop.style.left = Math.random() * 100 + "vw";
+
+        // Random animation duration (speed)
+        const duration = Math.random() * 2 + 2; // 2-4 seconds
+        drop.style.animationDuration = duration + "s";
+
+        // Random animation delay (start time)
+        drop.style.animationDelay = Math.random() * 5 + "s";
+
+        // Random width and height for natural variation
+        const scale = Math.random() * 1 + 0.5;
+        drop.style.width = 2 * scale + "px";
+        drop.style.height = 10 * scale + "px";
+
+        rainContainer.appendChild(drop);
+    }
 
    </script>
    </main>
